@@ -14,5 +14,5 @@ public class Accounts extends BaseEntity{
     @Column
     private String accountType;
     @Column
-    private double branchAddress;
+    private String branchAddress;
 }

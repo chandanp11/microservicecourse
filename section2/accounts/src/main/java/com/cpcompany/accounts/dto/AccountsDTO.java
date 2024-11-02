@@ -6,5 +6,5 @@ import lombok.Data;
 public class AccountsDTO {
     private Long accountNumber;
     private String accountType;
-    private double branchAddress;
+    private String branchAddress;
 }
