@@ -60,6 +60,38 @@ public class AccountServiceImpl implements IAccountService {
         return customerDTO;
     }
 
+    @Override
+    public boolean updateAccount(CustomerDTO customerDTO) {
+        boolean isUpdated = false;
+        AccountsDTO accountsDTO = customerDTO.getAccountDTO();
+        if (accountsDTO != null) {
+            Accounts accounts = accountRepository.findById(accountsDTO.getAccountNumber()).orElseThrow(
+                    () -> new ResourceNotFoundException("Account", "accountNumber", accountsDTO.getAccountNumber().toString())
+            );
+            AccountsMapper.mapToAccounts(accountsDTO, accounts);
+            accounts = accountRepository.save(accounts);
+
+            Long customerId = accounts.getCustomerId();
+            Customer customer = customerRepository.findById(customerId).orElseThrow(
+                    () -> new ResourceNotFoundException("Customer", "customerId", customerId.toString())
+            );
+            CustomerMapper.mapToCustomer(customerDTO, customer);
+            customerRepository.save(customer);
+            isUpdated = true;
+        }
+        return isUpdated;
+    }
+
+    @Override
+    public boolean deleteAccount(String mobileNumber) {
+        Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
+                () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
+        );
+        accountRepository.deleteByCustomerId(customer.getCustomerId());
+        customerRepository.deleteById(customer.getCustomerId());
+        return true;
+    }
+
     /**
  * Creates a new account for the given customer.
  *
@@ -78,4 +110,6 @@ public class AccountServiceImpl implements IAccountService {
         newAccount.setCreatedBy("SYSTEM");
         return newAccount;
     }
+
+
 }
