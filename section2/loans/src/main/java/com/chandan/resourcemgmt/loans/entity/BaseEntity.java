@@ -1,4 +1,4 @@
-package com.cpcompany.accounts.entity;
+package com.chandan.resourcemgmt.loans.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
@@ -16,9 +16,10 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-@Getter @Setter @ToString
+@Getter
+@Setter
+@ToString
 public class BaseEntity {
-
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
@@ -31,7 +32,7 @@ public class BaseEntity {
     @Column(insertable = false)
     private LocalDateTime updatedAt;
 
-    @LastModifiedBy
     @Column(insertable = false)
+    @LastModifiedBy
     private String updatedBy;
 }
