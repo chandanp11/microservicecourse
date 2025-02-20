@@ -23,6 +23,14 @@ repositories {
 	mavenCentral()
 }
 
+jar{
+	enabled = true
+}
+
+tasks.named("bootBuildImage") {
+	imageName = "chandanp11/${rootProject.name}:s4"
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
