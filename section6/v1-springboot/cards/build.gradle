@@ -7,8 +7,7 @@ plugins {
 
 group = 'com.chandan.cardsmanagement'
 version = '0.0.1-SNAPSHOT'
-//jib.to.image = "chandanp11/${rootProject.name}:s4"
-jib.to.image = "chandanp11/${rootProject.name}:s4"
+jib.to.image = "chandanp11/${rootProject.name}:s6"
 
 java {
     toolchain {

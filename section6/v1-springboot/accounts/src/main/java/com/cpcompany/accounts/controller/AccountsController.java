@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +24,18 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "CRUD API for Accounts microservice", description = "CRUD API for Accounts microservice to create, fetch, update and delete account details")
 @RestController
 @RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
-@AllArgsConstructor
+//@AllArgsConstructor
 @Validated
 public class AccountsController {
-    private IAccountService accountService;
+
+    public AccountsController(IAccountService accountService) {
+        this.accountService = accountService;
+    }
+
+    private final IAccountService accountService;
+
+    @Value("${build.version}")
+    private String buildVersion;
 
     @Operation(
             summary = "Create account REST API",
@@ -87,5 +96,24 @@ public class AccountsController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ResponseDTO(AccountsConstants.STATUS_500, AccountsConstants.MESSAGE_500));
         }
+    }
+
+    @Operation(
+            summary = "get Build information",
+            description = "get build information that is deployed into account microservice"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Account updated successfully"),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Internal server error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDTO.class)
+                    )
+            )
+    })
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildInfo() {
+        return ResponseEntity.ok().body(buildVersion);
     }
 }
