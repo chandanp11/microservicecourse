@@ -14,8 +14,24 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  config:
+    import:
+      - "application_qa.yml"
+      - "application_prod.yml"
+  profiles:
+    active:
+      - "qa"
 server:
   port: 8080
 
 build:
-  version: "1.0"
+  version: "3.0"
+
+accounts:
+  message: "welcome to Chandan's account related local APIs"
+  contactDetails:
+    name: "Chandan Patil"
+    email: "chandan.p11@gmail.com"
+  onCallSupport:
+    - 123456789
+    - 987654321

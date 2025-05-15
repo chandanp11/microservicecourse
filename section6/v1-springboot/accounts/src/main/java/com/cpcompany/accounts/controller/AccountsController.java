@@ -1,6 +1,7 @@
 package com.cpcompany.accounts.controller;
 
 import com.cpcompany.accounts.constants.AccountsConstants;
+import com.cpcompany.accounts.dto.AccountsContactInfoDto;
 import com.cpcompany.accounts.dto.CustomerDTO;
 import com.cpcompany.accounts.dto.ErrorResponseDTO;
 import com.cpcompany.accounts.dto.ResponseDTO;
@@ -14,7 +15,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +39,12 @@ public class AccountsController {
 
     @Value("${build.version}")
     private String buildVersion;
+
+    @Autowired
+    private Environment environment;
+
+    @Autowired
+    private AccountsContactInfoDto accountsContactInfoDto;
 
     @Operation(
             summary = "Create account REST API",
@@ -115,5 +124,43 @@ public class AccountsController {
     @GetMapping("/build-info")
     public ResponseEntity<String> getBuildInfo() {
         return ResponseEntity.ok().body(buildVersion);
+    }
+
+    @Operation(
+            summary = "get java version",
+            description = "get java version that is deployed into account microservice"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Account updated successfully"),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Internal server error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDTO.class)
+                    )
+            )
+    })
+    @GetMapping("/java-version")
+    public ResponseEntity<String> getJavaVersion() {
+        return ResponseEntity.ok().body(environment.getProperty("MAVEN_HOME"));
+    }
+
+    @Operation(
+            summary = "get contact info",
+            description = "get contact info in case of any issues with accounts service"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Account updated successfully"),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Internal server error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDTO.class)
+                    )
+            )
+    })
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountsContactInfoDto> getContactInfo() {
+        return ResponseEntity.ok().body(accountsContactInfoDto);
     }
 }
