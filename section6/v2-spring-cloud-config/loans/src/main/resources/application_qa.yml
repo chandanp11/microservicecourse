@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+
+build:
+  version: "2.1"
+
+accounts:
+  message: "welcome to Chandan's Loans related local APIs"
+  contactDetails:
+    name: "Loans Developer - qa"
+    email: "chandan.p11@gmail.com"
+  onCallSupport:
+    - 123456789
+    - 987654321

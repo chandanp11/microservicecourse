@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+
+build:
+  version: "1.1"
+
+accounts:
+  message: "welcome to Chandan's Loans related local APIs"
+  contactDetails:
+    name: "Loans Developer - prod"
+    email: "chandan.p11@gmail.com"
+  onCallSupport:
+    - 123456789
+    - 987654321
