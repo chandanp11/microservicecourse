@@ -14,5 +14,26 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  config:
+    import:
+      - "application_qa.yml"
+      - "application_prod.yml"
+    activate:
+      on-profile:
+  profiles:
+    active:
+      - "qa"
 server:
   port: 8090
+
+build:
+  version: "3.1"
+
+loans:
+  message: "welcome to Chandan's Loans related local APIs"
+  contactDetails:
+    name: "Loans Developer - Default"
+    email: "chandan.p11@gmail.com"
+  onCallSupport:
+    - 123456789
+    - 987654321
