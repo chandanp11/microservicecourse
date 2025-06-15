@@ -1,0 +1,11 @@
+build:
+  version: "3.1"
+
+cards:
+  message: "welcome to Chandan's CARDs related local APIs prod"
+  contactDetails:
+    name: "Cards Developer - Default"
+    email: "chandan.p11@gmail.com"
+  onCallSupport:
+    - 123456789
+    - 987654321

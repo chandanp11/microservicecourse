@@ -1,0 +1,11 @@
+build:
+  version: "2.0"
+
+accounts:
+  message: "welcome to Chandan's account related local APIs - QA"
+  contactDetails:
+    name: "Atharva Patil"
+    email: "atharva_qa@gmail.com"
+  onCallSupport:
+    - 123456789
+    - 987654321

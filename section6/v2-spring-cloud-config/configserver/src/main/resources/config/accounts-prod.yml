@@ -1,0 +1,11 @@
+build:
+  version: "1.0"
+
+accounts:
+  message: "welcome to Chandan's account related local APIs - Prod"
+  contactDetails:
+    name: "Ananya Patil"
+    email: "ananya_prod@gmail.com"
+  onCallSupport:
+    - 123456789
+    - 987654321

@@ -1,0 +1,11 @@
+build:
+  version: "1.1"
+
+loans:
+  message: "welcome to Chandan's Loans related local APIs - prod"
+  contactDetails:
+    name: "Loans Developer - prod"
+    email: "chandan.p11@gmail.com"
+  onCallSupport:
+    - 123456789
+    - 987654321
